@@ -1,0 +1,860 @@
+{
+	"info": {
+		"_postman_id": "8f3669d6-e4e5-4925-a6a8-010be3dce7e7",
+		"name": "rolling-glory-gifts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19448952"
+	},
+	"item": [
+		{
+			"name": "root",
+			"item": [
+				{
+					"name": "ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}",
+							"host": [
+								"{{host}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response body data terdapat data access_token', () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    const responseJson = pm.response.json();\r",
+									"    const { result } = responseJson;\r",
+									"\r",
+									"    pm.expect(result).to.haveOwnProperty('access_token');\r",
+									"    pm.expect(result.access_token).to.not.equals('');\r",
+									"\r",
+									"    pm.collectionVariables.set(\"access_token\", result.access_token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"roots\",\r\n    \"password\": \"roots\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response body data terdapat data access_token', () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    const responseJson = pm.response.json();\r",
+									"    const { result } = responseJson;\r",
+									"\r",
+									"    pm.expect(result).to.haveOwnProperty('access_token');\r",
+									"    pm.expect(result.access_token).to.not.equals('');\r",
+									"\r",
+									"    pm.collectionVariables.set(\"access_token\", result.access_token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"danny\",\r\n    \"password\": \"danny\",\r\n    \"confirm_password\": \"danny\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "ganti username",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"danny-change\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/change-username",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"change-username"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ganti password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"old_password\": \"danny\",\r\n    \"new_password\": \"danny-change\",\r\n    \"confirm_new_password\": \"danny-change\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/change-password",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users?page=1&rows_per_page=10&order=id&sort=DESC",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "rows_per_page",
+									"value": "10"
+								},
+								{
+									"key": "order",
+									"value": "id",
+									"description": "id/username/created_at/updated_at"
+								},
+								{
+									"key": "sort",
+									"value": "DESC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "menambah user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"roots2\",\r\n    \"password\": \"roots2\",\r\n    \"point\": 100000,\r\n    \"roles\": [\r\n        \"roots\",\r\n        \"admins\",\r\n        \"clients\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get users by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "meperbaharui data user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"change\",\r\n    \"roles\": [\r\n        \"admins\"\r\n    ],\r\n    \"point\": 444\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "memperbaharui data user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roles\": [\r\n        \"clients\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hapus data user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "gifts",
+			"item": [
+				{
+					"name": "get gifts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/gifts?page=1&rows_per_page=25&order=avg_rating&sort=DESC",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"gifts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "rows_per_page",
+									"value": "25"
+								},
+								{
+									"key": "order",
+									"value": "avg_rating",
+									"description": "id/name/stock/count_rating/created_at/updated_at"
+								},
+								{
+									"key": "sort",
+									"value": "DESC",
+									"description": "ASC/DESC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tambah gift",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "name lorem",
+									"type": "text"
+								},
+								{
+									"key": "point",
+									"value": "1500",
+									"type": "text"
+								},
+								{
+									"key": "excerpt",
+									"value": "excerpt lorem",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "description lorem",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/mkton/OneDrive/Pictures/1. lead add group.png"
+								},
+								{
+									"key": "stock",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/gifts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"gifts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get gift by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/gifts/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"gifts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "memperbaharui dataa gift",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "replace name lorem",
+									"type": "text"
+								},
+								{
+									"key": "point",
+									"value": "999999",
+									"type": "text"
+								},
+								{
+									"key": "excerpt",
+									"value": "replace excerpt lorem",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "replace  description lorem",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/mkton/OneDrive/Pictures/1. lead add group.png"
+								},
+								{
+									"key": "stock",
+									"value": "999",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/gifts/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"gifts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "memperbahrui data gift",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "nini ajaj",
+									"type": "text"
+								},
+								{
+									"key": "point",
+									"value": "1500",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "excerpt",
+									"value": "excerpt lorem",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "description lorem",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"value": "image lorem",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "stock",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/gifts/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"gifts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hapus data gift",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/gifts/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"gifts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "26"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "redeem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/gifts/:id/redeem",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"gifts",
+								":id",
+								"redeem"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rating",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"score\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/gifts/:id/rating",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"gifts",
+								":id",
+								"rating"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:80",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwZXJzb25hbCIsInN1YiI6InBlcnNvbmFsIiwiZXhwIjoxNjU5OTI5NTc4LCJqdGkiOiIzNTEiLCJVc2VySUQiOjM1MSwiUm9sZXMiOlsiY2xpZW50cyJdfQ.q7p51LdaY-SJ3eFQuOfMMr3pD7G2cAT_Q6nTbuZJOcI",
+			"type": "string"
+		},
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
