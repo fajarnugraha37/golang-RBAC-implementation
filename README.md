@@ -1,4 +1,4 @@
-# Rolling Glory BE Test
+# RBAC implementation in Golang
 
 ### Local Dev Specification
     - go: v1.18
